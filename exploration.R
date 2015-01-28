@@ -21,7 +21,7 @@
 
 
 ## Load data
-packages <- c("gdata")
+packages <- c("gdata", "ggplot2", "data.table", "lattice", "lubridate", "reshape2")
 packages <- lapply(packages, FUN = function(x) {
     if (!require(x, character.only = TRUE)) {
         install.packages(x)
@@ -54,4 +54,11 @@ train$season<-as.factor(train$season)
 train$holiday<-as.factor(train$holiday)
 train$workingday<-as.factor(train$workingday)
 train$weather<-as.factor(train$weather)
+
+
+#Initial plotting
+qplot(datetime, count, data = train)
+
+traindt<-as.data.table(train)
+fit<-glm(count~., data = train)
 
